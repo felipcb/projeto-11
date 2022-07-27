@@ -3,8 +3,7 @@
 import { faker } from '@faker-js/faker';
 
 beforeEach(() => {
-    cy.visit('http://lojaebac.ebaconline.art.br/')
-    cy.get('.icon-user-unfollow').click()
+    cy.visit('http://lojaebac.ebaconline.art.br/minha-conta')
 });
 
 describe('Usuário deve realizar o pre-cadastro', () => {

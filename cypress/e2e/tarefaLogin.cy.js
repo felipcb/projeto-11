@@ -1,8 +1,8 @@
 /// <reference types = "cypress"/>
+const perfil = require('../fixtures/perfil.json')
 
 beforeEach(() => {
-  cy.visit('http://lojaebac.ebaconline.art.br/')
-  cy.get('.icon-user-unfollow').click()
+  cy.visit('http://lojaebac.ebaconline.art.br/minha-conta/')
 });
 
 afterEach(() => {
@@ -17,6 +17,26 @@ describe('Funcionalidade Login', () => {
     cy.get('.woocommerce-form > .button').click()
 
     cy.get('a > .hidden-xs').should('contain', 'Welcome')
+  })
+
+  it('Deve fazer login com sucesso - usando arquivo de dados', () => {
+    cy.get('#username').type(perfil.usuario)
+    cy.get('#password').type(perfil.senha)
+    cy.get('.woocommerce-form > .button').click()
+
+    cy.get('a > .hidden-xs').should('contain', 'Welcome')
+  })
+
+  it.only('Deve fazer login com sucesso - usando fixture', () => {
+    cy.fixture('perfil').then(dados => {
+      cy.get('#username').type(dados.usuario)
+      cy.get('#password').type(dados.senha, {log:false})
+      cy.get('.woocommerce-form > .button').click()
+
+      cy.get('a > .hidden-xs').should('contain', 'Welcome')
+
+    })
+
   })
 
   it('Deve exibir mensagem de alerta ao inserir usuario inexistente', () => {
