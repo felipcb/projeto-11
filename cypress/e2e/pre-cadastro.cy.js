@@ -17,10 +17,16 @@ describe('Usuário deve realizar o pre-cadastro', () => {
         cy.get('#account_first_name').type(faker.name.firstName())
         cy.get('#account_last_name').type(faker.name.lastName())
         cy.get('.woocommerce-Button').click()
-        
+
         cy.get('.woocommerce-message').should('contain', 'Detalhes da conta modificados com sucesso.')
 
     });
 
+    it.only('Cadastrar com Comandos Customizados', () => {
+        let emailFaker2 = faker.internet.email()
+        cy.preCadastro(emailFaker2, 'senha@senha', 'Felipe', 'Barreto')
 
+        cy.get('.woocommerce-message').should('contain', 'Detalhes da conta modificados com sucesso.')
+
+    });
 });
